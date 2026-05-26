@@ -98,7 +98,7 @@ export default function App() {
         </div>
       )}
 
-      {/* 1. ヘッダーエリア (固定サイズ) */}
+      {/* 1. ヘッダーエリア */}
       <div className="flex-none flex items-center justify-between mb-1">
         <div className="flex items-center space-x-3">
           <div className="bg-[#89C598] border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-4 py-0.5 text-base font-bold tracking-wider">
@@ -124,7 +124,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* 2. 入力・検索バー (固定サイズ) */}
+      {/* 2. 入力・検索バー */}
       <div className="flex-none bg-[#717375] p-1.5 flex items-center justify-between mb-1">
         <div className="flex items-center space-x-2 flex-1 max-w-2xl">
           <input 
@@ -149,8 +149,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* 3. メイン明細エリア (💡ここをフレキシブル化！) */}
-      {/* flex-1 で余った高さを全部使い、min-h-0 でブラウザの圧迫に合わせて絶対に縮むように指定 */}
+      {/* 3. メイン明細エリア (自動伸縮) */}
       <div className="flex-1 bg-[#828487] p-0.5 text-xs overflow-y-auto border border-gray-600 min-h-0">
         <table className="w-full text-left border-collapse table-fixed">
           <thead className="sticky top-0 bg-[#828487] z-10 text-[10px]">
@@ -196,7 +195,7 @@ export default function App() {
         </table>
       </div>
 
-      {/* 4. フッター・決済エリア (💡押しやすい「元の大きさ」でガッチリ固定！) */}
+      {/* 4. フッター・決済エリア (固定サイズ) */}
       <div className="flex-none mt-1.5 grid grid-cols-12 gap-2 h-36">
         
         {/* 左 */}
@@ -204,11 +203,12 @@ export default function App() {
           <button 
             onClick={handleCancel}
             disabled={isLoading}
-            className="w-full h-20 bg-gradient-to-b from-gray-100 to-gray-300 hover:from-gray-200 hover:to-gray-400 border border-gray-400 shadow-sm text-xs font-bold rounded text-gray-800 disabled:opacity-50"
+            className="w-full h-[74px] bg-gradient-to-b from-gray-100 to-gray-300 hover:from-gray-200 hover:to-gray-400 border border-gray-400 shadow-sm text-xs font-bold rounded text-gray-800 disabled:opacity-50"
           >
             キャンセル
           </button>
-          <button className="w-16 h-8 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 shadow-sm text-[10px] font-bold rounded flex items-center justify-center">
+          {/* 💡 集計ボタンの高さを h-8 ➔ h-9 に少し大きく変更 */}
+          <button className="w-16 h-9 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 shadow-sm text-[10px] font-bold rounded flex items-center justify-center">
             集計
           </button>
         </div>
@@ -228,8 +228,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* 金額・メーター（一番見やすい元の大きさに復活） */}
-          <div className="grid grid-cols-3 gap-1.5 text-center">
+          {/* 💡 上の余白を詰める（mt-0.5）ことで、「預かり金」「合計」「おつり」を少し上へ移動 */}
+          <div className="grid grid-cols-3 gap-1.5 text-center mt-0.5">
             <div>
               <div className="bg-[#828487] text-white text-[9px] py-0.5 font-bold">預かり金</div>
               <input 
@@ -255,12 +255,12 @@ export default function App() {
             </div>
           </div>
 
-          {/* お茶席券も集計に合わせた h-8 のままキープ */}
+          {/* 💡 お茶席券ボタンの高さを h-8 ➔ h-9 に少し大きく変更 */}
           <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => handleAddTicket('お茶席券(冷)', 500)} disabled={isLoading} className="h-8 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#8DB7C7] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
+            <button onClick={() => handleAddTicket('お茶席券(冷)', 500)} disabled={isLoading} className="h-9 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#8DB7C7] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
               お茶席券(冷)
             </button>
-            <button onClick={() => handleAddTicket('お茶席券(温)', 500)} disabled={isLoading} className="h-8 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#D2938E] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
+            <button onClick={() => handleAddTicket('お茶席券(温)', 500)} disabled={isLoading} className="h-9 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#D2938E] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
               お茶席券(温)
             </button>
           </div>
@@ -268,7 +268,6 @@ export default function App() {
 
         {/* 右 */}
         <div className="col-span-3 flex flex-col justify-between space-y-1.5">
-          {/* 「決定」ボタンの大きなサイズ感も完全に復元 */}
           <button 
             onClick={handleCheckout}
             disabled={cart.length === 0 || isLoading}
@@ -291,7 +290,8 @@ export default function App() {
             <button className="flex-1 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 text-[10px] font-bold py-1 rounded text-gray-700 leading-none">
               レジオープン
             </button>
-            <button className="w-8 h-6 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 rounded flex items-center justify-center text-xs">
+            {/* 💡 右下のアイコンボタンと全体の高さを合わせるために少し調整 */}
+            <button className="w-8 h-[22px] bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 rounded flex items-center justify-center text-xs">
               🏷️
             </button>
           </div>
