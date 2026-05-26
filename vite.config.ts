@@ -28,21 +28,24 @@ export default defineConfig({
     react(),
     // 👇 PWAの設定を追加
     VitePWA({
-      registerType: 'autoUpdate', // サービスワーカーを自動更新する
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      registerType: 'autoUpdate',
+      injectRegister: 'inline', // 💡 サブディレクトリ（/DemoPos/）対策としてこれを追加！
+      includeAssets: ['favicon.png', 'pwa-192x192.png', 'pwa-512x512.png'], // 💡 実際に存在するファイル名に合わせる
       manifest: {
         name: '売店 POS System',
         short_name: '売店POS',
         description: 'レトロスタイルの売店向けPOSシステム',
         theme_color: '#F3EAD1',
         background_color: '#F3EAD1',
-        display: 'standalone', // スタンドアロン（アプリ風）で起動
-        orientation: 'landscape', // POSなので横画面に固定
+        display: 'standalone',
+        orientation: 'landscape',
+        // start_url を明示的に指定して、アプリ起動時にトップページを確実に開くようにする
+        start_url: '/DemoPos/', 
         icons: [
           {
-            "src": "favicon.png",
-            "sizes": "48x48",
-            "type": "image/png"
+            src: 'favicon.png',
+            sizes: '48x48',
+            type: 'image/png'
           },
           {
             "src": "favicon_64x64.png",
@@ -58,22 +61,6 @@ export default defineConfig({
             "src": "favicon_256x256.png",
             "sizes": "256x256",
             "type": "image/png"
-          },
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
           },
         ],
       },
