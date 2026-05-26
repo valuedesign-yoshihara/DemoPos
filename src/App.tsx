@@ -158,7 +158,7 @@ export default function App() {
               <th className="w-[10%] p-1 text-center">短縮コード</th>
               <th className="w-[34%] p-1">商品名</th>
               <th className="w-[12%] p-1 text-right">単価</th>
-              <th className="w-[14%] p-1 text-center">個数</th>
+              <th className="w-[16%] p-1 text-center">個数</th> {/* 💡 ボタン幅拡張のため幅を14%➔16%に調整 */}
               <th className="w-[12%] p-1 text-right">金額</th>
               <th className="w-[6%] p-1 text-center"></th>
             </tr>
@@ -173,20 +173,34 @@ export default function App() {
             ) : (
               cart.map((item) => (
                 <tr key={item.barcode} className="bg-white border-b border-gray-300 font-bold text-gray-800 text-xs">
-                  <td className="bg-[#F6D99C] border-r border-gray-300 p-1 font-mono tracking-tighter text-[10px] truncate">{item.barcode}</td>
-                  <td className="border-r border-gray-300 p-1 text-center font-mono text-[11px]">{item.code}</td>
-                  <td className="border-r border-gray-300 p-1 truncate text-xs">{item.name}</td>
-                  <td className="border-r border-gray-300 p-1 text-right font-mono text-xs">{item.price.toLocaleString()}</td>
-                  <td className="border-r border-gray-300 p-0.5 text-center">
-                    <div className="flex items-center justify-center space-x-1">
-                      <button onClick={() => updateQuantity(item.barcode, -1)} disabled={isLoading} className="bg-[#D1D5DB] border border-gray-400 rounded px-1 py-0.5 text-[9px] font-bold">-</button>
+                  {/* 💡 py-1 ➔ py-2 に変更して各セルの縦幅（アイテムの高さ）をアップ */}
+                  <td className="bg-[#F6D99C] border-r border-gray-300 py-2 px-1 font-mono tracking-tighter text-[10px] truncate">{item.barcode}</td>
+                  <td className="border-r border-gray-300 py-2 px-1 text-center font-mono text-[11px]">{item.code}</td>
+                  <td className="border-r border-gray-300 py-2 px-1 truncate text-xs">{item.name}</td>
+                  <td className="border-r border-gray-300 py-2 px-1 text-right font-mono text-xs">{item.price.toLocaleString()}</td>
+                  <td className="border-r border-gray-300 py-1 px-0.5 text-center">
+                    {/* 💡 flexコンテナ内の隙間を広げ、各ボタンを w-6 / h-6 に固定して押しやすく調整 */}
+                    <div className="flex items-center justify-center space-x-1.5">
+                      <button 
+                        onClick={() => updateQuantity(item.barcode, -1)} 
+                        disabled={isLoading} 
+                        className="bg-[#D1D5DB] border border-gray-400 rounded w-6 h-6 flex items-center justify-center text-xs font-bold active:bg-gray-300"
+                      >
+                        -
+                      </button>
                       <span className="w-4 inline-block text-center font-mono text-xs">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.barcode, 1)} disabled={isLoading} className="bg-[#D1D5DB] border border-gray-400 rounded px-1 py-0.5 text-[9px] font-bold">+</button>
+                      <button 
+                        onClick={() => updateQuantity(item.barcode, 1)} 
+                        disabled={isLoading} 
+                        className="bg-[#D1D5DB] border border-gray-400 rounded w-6 h-6 flex items-center justify-center text-xs font-bold active:bg-gray-300"
+                      >
+                        +
+                      </button>
                     </div>
                   </td>
-                  <td className="border-r border-gray-300 p-1 text-right font-mono text-xs">{(item.price * item.quantity).toLocaleString()}</td>
-                  <td className="p-0.5 text-center">
-                    <button onClick={() => removeItem(item.barcode)} disabled={isLoading} className="bg-[#E25C5C] text-white text-[9px] font-bold px-1 py-0.5 rounded">削除</button>
+                  <td className="border-r border-gray-300 py-2 px-1 text-right font-mono text-xs">{(item.price * item.quantity).toLocaleString()}</td>
+                  <td className="py-1 px-0.5 text-center">
+                    <button onClick={() => removeItem(item.barcode)} disabled={isLoading} className="bg-[#E25C5C] text-white text-[9px] font-bold px-1 py-1 rounded active:bg-red-700">削除</button>
                   </td>
                 </tr>
               ))
@@ -195,7 +209,7 @@ export default function App() {
         </table>
       </div>
 
-      {/* 4. フッター・決済エリア (固定サイズ) */}
+      {/* 4. フッター・決済エリア */}
       <div className="flex-none mt-1.5 grid grid-cols-12 gap-2 h-36">
         
         {/* 左 */}
@@ -207,7 +221,6 @@ export default function App() {
           >
             キャンセル
           </button>
-          {/* 💡 集計ボタンの高さを h-8 ➔ h-9 に少し大きく変更 */}
           <button className="w-16 h-9 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 shadow-sm text-[10px] font-bold rounded flex items-center justify-center">
             集計
           </button>
@@ -228,7 +241,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* 💡 上の余白を詰める（mt-0.5）ことで、「預かり金」「合計」「おつり」を少し上へ移動 */}
           <div className="grid grid-cols-3 gap-1.5 text-center mt-0.5">
             <div>
               <div className="bg-[#828487] text-white text-[9px] py-0.5 font-bold">預かり金</div>
@@ -255,7 +267,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* 💡 お茶席券ボタンの高さを h-8 ➔ h-9 に少し大きく変更 */}
           <div className="grid grid-cols-2 gap-2">
             <button onClick={() => handleAddTicket('お茶席券(冷)', 500)} disabled={isLoading} className="h-9 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#8DB7C7] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
               お茶席券(冷)
@@ -290,7 +301,6 @@ export default function App() {
             <button className="flex-1 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 text-[10px] font-bold py-1 rounded text-gray-700 leading-none">
               レジオープン
             </button>
-            {/* 💡 右下のアイコンボタンと全体の高さを合わせるために少し調整 */}
             <button className="w-8 h-[22px] bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 rounded flex items-center justify-center text-xs">
               🏷️
             </button>
