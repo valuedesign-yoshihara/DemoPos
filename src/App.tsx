@@ -87,7 +87,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen w-screen bg-[#F3EAD1] p-1.5 text-[#333333] font-sans select-none flex flex-col overflow-hidden relative">
+    <div className="h-screen w-screen bg-[#F3EAD1] p-1 text-[#333333] font-sans select-none flex flex-col overflow-hidden relative">
       
       {isLoading && (
         <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center z-50">
@@ -99,25 +99,25 @@ export default function App() {
       )}
 
       {/* 1. ヘッダーエリア */}
-      <div className="flex-none flex items-center justify-between mb-1">
+      <div className="flex-none flex items-center justify-between mb-0.5">
         <div className="flex items-center space-x-3">
-          <div className="bg-[#89C598] border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-4 py-0.5 text-base font-bold tracking-wider">
+          <div className="bg-[#89C598] border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-3 py-0.5 text-sm font-bold tracking-wider">
             売店 POS System
           </div>
           <div className="flex items-center space-x-1.5">
-            <div className="bg-[#EAD69E] text-center text-[10px] py-0.5 px-2 font-bold border border-black leading-none">販売</div>
+            <div className="bg-[#EAD69E] text-center text-[9px] py-0.5 px-2 font-bold border border-black leading-none">販売</div>
             <div className="flex items-center text-xs border border-gray-400 bg-white">
-              <span className="bg-[#82868A] text-white px-1.5 py-0.5 text-[10px]">担当者</span>
-              <span className="px-2 py-0.5 font-bold bg-[#D3EFE0] text-[11px]">1000 | システム管理者</span>
+              <span className="bg-[#82868A] text-white px-1.5 py-0.5 text-[9px]">担当者</span>
+              <span className="px-2 py-0.5 font-bold bg-[#D3EFE0] text-[10px]">1000 | システム管理者</span>
             </div>
           </div>
         </div>
 
         <div className="flex items-center space-x-3">
-          <button className="bg-[#D1D5DB] border border-gray-400 text-[#C93B3B] font-bold px-2 py-0.5 rounded shadow-sm text-[11px]">
+          <button className="bg-[#D1D5DB] border border-gray-400 text-[#C93B3B] font-bold px-2 py-0.5 rounded shadow-sm text-[10px]">
             返品
           </button>
-          <div className="flex items-center text-[10px] border border-gray-300 bg-[#E5E7EB] px-1.5 py-0.5 rounded">
+          <div className="flex items-center text-[9px] border border-gray-300 bg-[#E5E7EB] px-1.5 py-0.5 rounded">
             <span className="text-gray-600 mr-1">伝票日付</span>
             <span className="bg-white px-1.5 border border-gray-300 font-mono">2026/05/11</span>
           </div>
@@ -125,12 +125,12 @@ export default function App() {
       </div>
 
       {/* 2. 入力・検索バー */}
-      <div className="flex-none bg-[#717375] p-1.5 flex items-center justify-between mb-1">
+      <div className="flex-none bg-[#717375] p-1 flex items-center justify-between mb-1">
         <div className="flex items-center space-x-2 flex-1 max-w-2xl">
           <input 
             type="text" 
             placeholder="商品バーコード・短縮コード" 
-            className="bg-[#D2F1FF] border border-gray-400 px-2 py-1 text-sm w-64 placeholder-gray-500 focus:outline-none font-mono"
+            className="bg-[#D2F1FF] border border-gray-400 px-2 py-0.5 text-xs w-64 placeholder-gray-500 focus:outline-none font-mono"
             value={inputVal}
             disabled={isLoading}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputVal(e.target.value)}
@@ -138,55 +138,55 @@ export default function App() {
           <button 
             onClick={handleSearchClick}
             disabled={isLoading}
-            className="bg-[#E5E7EB] hover:bg-gray-200 active:bg-gray-300 border border-gray-500 text-xs font-bold px-5 py-1 rounded shadow-sm whitespace-nowrap"
+            className="bg-[#E5E7EB] hover:bg-gray-200 active:bg-gray-300 border border-gray-500 text-xs font-bold px-4 py-0.5 rounded shadow-sm whitespace-nowrap"
           >
             🔍 商品一覧から検索
           </button>
         </div>
         <div className="flex space-x-1">
-          <button className="bg-[#E5E7EB] px-1 py-0.5 border border-gray-400 rounded text-[10px]">▲</button>
-          <button className="bg-[#E5E7EB] px-1 py-0.5 border border-gray-400 rounded text-[10px]">▼</button>
+          <button className="bg-[#E5E7EB] px-1 border border-gray-400 rounded text-[9px]">▲</button>
+          <button className="bg-[#E5E7EB] px-1 border border-gray-400 rounded text-[9px]">▼</button>
         </div>
       </div>
 
-      {/* 3. メイン明細エリア（💡1138x712を考慮し最小高さを100pxへ微小圧縮、自動伸縮します） */}
-      <div className="flex-1 bg-[#828487] p-0.5 text-xs overflow-y-auto border border-gray-600 min-h-[100px]">
+      {/* 3. メイン明細エリア（💡flex-1を廃止。高さを小さめの「h-24（96px）」で固定にし、中のパディングも極限までスリム化） */}
+      <div className="flex-none bg-[#828487] p-0.5 text-[11px] overflow-y-auto border border-gray-600 h-24">
         <table className="w-full text-left border-collapse table-fixed">
-          <thead className="sticky top-0 bg-[#828487] z-10 text-[10px]">
+          <thead className="sticky top-0 bg-[#828487] z-10 text-[9px]">
             <tr className="text-white font-bold border-b border-gray-600">
-              <th className="w-[18%] p-1 text-center">バーコード</th>
-              <th className="w-[10%] p-1 text-center">短縮コード</th>
-              <th className="w-[34%] p-1">商品名</th>
-              <th className="w-[12%] p-1 text-right">単価</th>
-              <th className="w-[14%] p-1 text-center">個数</th>
-              <th className="w-[12%] p-1 text-right">金額</th>
-              <th className="w-[6%] p-1 text-center"></th>
+              <th className="w-[18%] p-0.5 text-center">バーコード</th>
+              <th className="w-[10%] p-0.5 text-center">短縮</th>
+              <th className="w-[34%] p-0.5">商品名</th>
+              <th className="w-[12%] p-0.5 text-right">単価</th>
+              <th className="w-[14%] p-0.5 text-center">個数</th>
+              <th className="w-[12%] p-0.5 text-right">金額</th>
+              <th className="w-[6%] p-0.5 text-center"></th>
             </tr>
           </thead>
           <tbody>
             {cart.length === 0 ? (
               <tr>
-                <td colSpan={7} className="text-center text-gray-300 pt-6 text-xs">
+                <td colSpan={7} className="text-center text-gray-300 pt-3 text-[11px]">
                   商品が登録されていません。
                 </td>
               </tr>
             ) : (
               cart.map((item) => (
-                <tr key={item.barcode} className="bg-white border-b border-gray-300 font-bold text-gray-800 text-xs">
-                  <td className="bg-[#F6D99C] border-r border-gray-300 p-1 font-mono tracking-tighter text-[10px] truncate">{item.barcode}</td>
-                  <td className="border-r border-gray-300 p-1 text-center font-mono text-[11px]">{item.code}</td>
-                  <td className="border-r border-gray-300 p-1 truncate text-xs">{item.name}</td>
-                  <td className="border-r border-gray-300 p-1 text-right font-mono text-xs">{item.price.toLocaleString()}</td>
-                  <td className="border-r border-gray-300 p-0.5 text-center">
-                    <div className="flex items-center justify-center space-x-1">
-                      <button onClick={() => updateQuantity(item.barcode, -1)} disabled={isLoading} className="bg-[#D1D5DB] border border-gray-400 rounded px-1 py-0.5 text-[9px] font-bold">-</button>
-                      <span className="w-4 inline-block text-center font-mono text-xs">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.barcode, 1)} disabled={isLoading} className="bg-[#D1D5DB] border border-gray-400 rounded px-1 py-0.5 text-[9px] font-bold">+</button>
+                <tr key={item.barcode} className="bg-white border-b border-gray-300 font-bold text-gray-800 text-[11px]">
+                  <td className="bg-[#F6D99C] border-r border-gray-300 p-0.5 font-mono tracking-tighter text-[9px] truncate">{item.barcode}</td>
+                  <td className="border-r border-gray-300 p-0.5 text-center font-mono text-[10px]">{item.code}</td>
+                  <td className="border-r border-gray-300 p-0.5 truncate">{item.name}</td>
+                  <td className="border-r border-gray-300 p-0.5 text-right font-mono">{item.price.toLocaleString()}</td>
+                  <td className="border-r border-gray-300 p-0 text-center">
+                    <div className="flex items-center justify-center space-x-0.5">
+                      <button onClick={() => updateQuantity(item.barcode, -1)} disabled={isLoading} className="bg-[#D1D5DB] border border-gray-400 rounded px-1 text-[9px] font-bold">-</button>
+                      <span className="w-3 inline-block text-center font-mono">{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.barcode, 1)} disabled={isLoading} className="bg-[#D1D5DB] border border-gray-400 rounded px-1 text-[9px] font-bold">+</button>
                     </div>
                   </td>
-                  <td className="border-r border-gray-300 p-1 text-right font-mono text-xs">{(item.price * item.quantity).toLocaleString()}</td>
-                  <td className="p-0.5 text-center">
-                    <button onClick={() => removeItem(item.barcode)} disabled={isLoading} className="bg-[#E25C5C] text-white text-[9px] font-bold px-1 py-0.5 rounded">削除</button>
+                  <td className="border-r border-gray-300 p-0.5 text-right font-mono">{(item.price * item.quantity).toLocaleString()}</td>
+                  <td className="p-0 text-center">
+                    <button onClick={() => removeItem(item.barcode)} disabled={isLoading} className="bg-[#E25C5C] text-white text-[9px] font-bold px-1 rounded">削除</button>
                   </td>
                 </tr>
               ))
@@ -195,15 +195,15 @@ export default function App() {
         </table>
       </div>
 
-      {/* 4. フッター・決済エリア（💡h-36の固定高さに戻し、引き伸ばし・間延びを完全解消） */}
-      <div className="flex-none mt-1.5 grid grid-cols-12 gap-2 h-36">
+      {/* 4. フッター・決済エリア */}
+      <div className="flex-none mt-1 grid grid-cols-12 gap-2 h-28">
         
         {/* 左 */}
         <div className="col-span-3 flex flex-col justify-between">
           <button 
             onClick={handleCancel}
             disabled={isLoading}
-            className="w-full h-20 bg-gradient-to-b from-gray-100 to-gray-300 hover:from-gray-200 hover:to-gray-400 border border-gray-400 shadow-sm text-xs font-bold rounded text-gray-800 disabled:opacity-50"
+            className="w-full h-16 bg-gradient-to-b from-gray-100 to-gray-300 hover:from-gray-200 hover:to-gray-400 border border-gray-400 shadow-sm text-xs font-bold rounded text-gray-800 disabled:opacity-50"
           >
             キャンセル
           </button>
@@ -232,7 +232,7 @@ export default function App() {
               <div className="bg-[#828487] text-white text-[9px] py-0.5 font-bold">預かり金</div>
               <input 
                 type="number"
-                className="w-full bg-[#D6DCFF] border border-gray-400 text-right font-mono text-lg font-bold py-0.5 px-1 focus:outline-none"
+                className="w-full bg-[#D6DCFF] border border-gray-400 text-right font-mono text-sm font-bold py-0.5 px-1 focus:outline-none"
                 value={cashReceived}
                 placeholder="0"
                 disabled={isLoading}
@@ -241,19 +241,18 @@ export default function App() {
             </div>
             <div>
               <div className="bg-[#828487] text-white text-[9px] py-0.5 font-bold">合計</div>
-              <div className="bg-[#EEF1F6] border border-gray-400 text-right font-mono text-lg font-bold py-0.5 px-1 text-blue-700">
+              <div className="bg-[#EEF1F6] border border-gray-400 text-right font-mono text-sm font-bold py-0.5 px-1 text-blue-700">
                 {totalPrice.toLocaleString()}
               </div>
             </div>
             <div>
               <div className="bg-[#828487] text-white text-[9px] py-0.5 font-bold">おつり</div>
-              <div className="bg-[#EEF1F6] border border-gray-400 text-right font-mono text-lg font-bold py-0.5 px-1 text-red-600">
+              <div className="bg-[#EEF1F6] border border-gray-400 text-right font-mono text-sm font-bold py-0.5 px-1 text-red-600">
                 {cashReceived ? change.toLocaleString() : 0}
               </div>
             </div>
           </div>
 
-          {/* 💡お茶席券も h-8 の綺麗なコンパクトサイズを維持 */}
           <div className="grid grid-cols-2 gap-2">
             <button onClick={() => handleAddTicket('お茶席券(冷)', 500)} disabled={isLoading} className="h-8 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#8DB7C7] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
               お茶席券(冷)
@@ -265,23 +264,23 @@ export default function App() {
         </div>
 
         {/* 右 */}
-        <div className="col-span-3 flex flex-col justify-between space-y-1.5">
+        <div className="col-span-3 flex flex-col justify-between space-y-1">
           <button 
             onClick={handleCheckout}
             disabled={cart.length === 0 || isLoading}
-            className="flex-1 bg-gradient-to-b from-white to-[#E2E3E5] hover:to-gray-300 border-2 border-[#547394] rounded flex flex-col items-center justify-center shadow-sm disabled:opacity-40"
+            className="flex-1 bg-gradient-to-b from-white to-[#E2E3E5] hover:to-gray-300 border-2 border-[#547394] rounded flex flex-col items-center justify-center shadow-sm disabled:opacity-40 py-0.5"
           >
-            <span className="text-sm font-bold text-gray-800 leading-none">決定</span>
-            <span className="text-[10px] text-gray-600 font-bold mt-1">現金</span>
+            <span className="text-xs font-bold text-gray-800 leading-none">決定</span>
+            <span className="text-[9px] text-gray-600 font-bold mt-0.5">現金</span>
           </button>
           
           <button 
             onClick={handleCheckout}
             disabled={cart.length === 0 || isLoading}
-            className="flex-1 bg-gradient-to-b from-white to-[#E2E3E5] hover:to-gray-300 border-2 border-[#5F876E] rounded flex flex-col items-center justify-center shadow-sm disabled:opacity-40"
+            className="flex-1 bg-gradient-to-b from-white to-[#E2E3E5] hover:to-gray-300 border-2 border-[#5F876E] rounded flex flex-col items-center justify-center shadow-sm disabled:opacity-40 py-0.5"
           >
-            <span className="text-sm font-bold text-gray-800 leading-none">決定</span>
-            <span className="text-[10px] text-gray-600 font-bold mt-1">クレジット</span>
+            <span className="text-xs font-bold text-gray-800 leading-none">決定</span>
+            <span className="text-[9px] text-gray-600 font-bold mt-0.5">クレジット</span>
           </button>
 
           <div className="flex space-x-1">
