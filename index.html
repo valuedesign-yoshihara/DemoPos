@@ -10,5 +10,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/DemoPos/sw.js')
+            .then(reg => console.log('オフライン対応完了！', reg.scope))
+            .catch(err => console.error('登録失敗：', err));
+        });
+      }
+    </script>
+    </body>
+
+  </html>
