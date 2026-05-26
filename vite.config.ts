@@ -40,6 +40,26 @@ export default defineConfig({
         orientation: 'landscape', // POSなので横画面に固定
         icons: [
           {
+            "src": "favicon.png",
+            "sizes": "48x48",
+            "type": "image/png"
+          },
+          {
+            "src": "favicon_64x64.png",
+            "sizes": "64x64",
+            "type": "image/png"
+          },
+          {
+            "src": "favicon_128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+          },
+          {
+            "src": "favicon_256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+          },
+          {
             src: 'pwa-192x192.png',
             sizes: '192x192',
             type: 'image/png',
