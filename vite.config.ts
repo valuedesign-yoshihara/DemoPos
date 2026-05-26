@@ -30,7 +30,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'inline', // 💡 サブディレクトリ（/DemoPos/）対策としてこれを追加！
-      filename: 'manifest.webmanifest',
+      filename: 'manifest.json',
       includeAssets: ['favicon.png', 'pwa-192x192.png', 'pwa-512x512.png'], // 💡 実際に存在するファイル名に合わせる
       manifest: {
         name: '売店 POS System',
