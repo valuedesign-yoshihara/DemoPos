@@ -28,7 +28,8 @@ export default defineConfig({
     react(),
     // 👇 PWAの設定を追加
     VitePWA({
-      registerType: 'autoUpdate',
+      strategies: 'generateSW', // 💡 明示的に生成ストラテジーを指定
+      outDir: 'dist',           // 💡 出力先が dist であることをプラグイン側にも叩き込む      registerType: 'autoUpdate',
       injectRegister: 'inline', // 💡 サブディレクトリ（/DemoPos/）対策としてこれを追加！
       filename: 'manifest.json',
       includeAssets: ['favicon.png', 'pwa-192x192.png', 'pwa-512x512.png'], // 💡 実際に存在するファイル名に合わせる
