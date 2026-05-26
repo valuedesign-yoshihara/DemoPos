@@ -149,8 +149,8 @@ export default function App() {
         </div>
       </div>
 
-      {/* 3. メイン明細エリア */}
-      <div className="flex-1 bg-[#828487] p-0.5 text-xs overflow-y-auto border border-gray-600 min-h-[120px]">
+      {/* 3. メイン明細エリア（💡1138x712を考慮し最小高さを100pxへ微小圧縮、自動伸縮します） */}
+      <div className="flex-1 bg-[#828487] p-0.5 text-xs overflow-y-auto border border-gray-600 min-h-[100px]">
         <table className="w-full text-left border-collapse table-fixed">
           <thead className="sticky top-0 bg-[#828487] z-10 text-[10px]">
             <tr className="text-white font-bold border-b border-gray-600">
@@ -195,7 +195,7 @@ export default function App() {
         </table>
       </div>
 
-      {/* 4. フッター・決済エリア */}
+      {/* 4. フッター・決済エリア（💡h-36の固定高さに戻し、引き伸ばし・間延びを完全解消） */}
       <div className="flex-none mt-1.5 grid grid-cols-12 gap-2 h-36">
         
         {/* 左 */}
@@ -207,7 +207,6 @@ export default function App() {
           >
             キャンセル
           </button>
-          {/* 💡基準となる「集計」ボタン (h-8) */}
           <button className="w-16 h-8 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 shadow-sm text-[10px] font-bold rounded flex items-center justify-center">
             集計
           </button>
@@ -222,7 +221,6 @@ export default function App() {
             </div>
             <div className="flex items-center space-x-1">
               <span className="text-[10px] font-bold text-gray-700">点数：</span>
-              {/* 💡 初期値に「0」が常に表示されるよう修正 */}
               <div className="bg-[#EEF1F6] border border-gray-300 w-12 py-0.5 px-1 text-right font-mono text-sm font-bold rounded">
                 {totalItems}
               </div>
@@ -255,7 +253,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* 💡「お茶席券」の高さを h-8 に変更し、集計ボタンの高さとガチッと揃えました */}
+          {/* 💡お茶席券も h-8 の綺麗なコンパクトサイズを維持 */}
           <div className="grid grid-cols-2 gap-2">
             <button onClick={() => handleAddTicket('お茶席券(冷)', 500)} disabled={isLoading} className="h-8 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#8DB7C7] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
               お茶席券(冷)
