@@ -124,10 +124,9 @@ export default function App() {
         </div>
       </div>
 
-      {/* 2. 入力・検索バー（💡検索ボタンを縦・横ともに大きく強調しました） */}
+      {/* 2. 入力・検索バー */}
       <div className="flex-none bg-[#717375] p-1.5 flex items-center justify-between mb-1">
         <div className="flex items-center space-x-2 flex-1 max-w-2xl">
-          {/* 入力欄もボタンの高さに合わせて px-2 py-1 (text-sm) に拡大 */}
           <input 
             type="text" 
             placeholder="商品バーコード・短縮コード" 
@@ -136,7 +135,6 @@ export default function App() {
             disabled={isLoading}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputVal(e.target.value)}
           />
-          {/* ボタンサイズを px-2 py-0.5(text-[10px]) ➔ px-4 py-1(text-xs font-bold) へ大幅サイズアップ */}
           <button 
             onClick={handleSearchClick}
             disabled={isLoading}
@@ -209,6 +207,7 @@ export default function App() {
           >
             キャンセル
           </button>
+          {/* 💡基準となる「集計」ボタン (h-8) */}
           <button className="w-16 h-8 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 shadow-sm text-[10px] font-bold rounded flex items-center justify-center">
             集計
           </button>
@@ -223,8 +222,9 @@ export default function App() {
             </div>
             <div className="flex items-center space-x-1">
               <span className="text-[10px] font-bold text-gray-700">点数：</span>
+              {/* 💡 初期値に「0」が常に表示されるよう修正 */}
               <div className="bg-[#EEF1F6] border border-gray-300 w-12 py-0.5 px-1 text-right font-mono text-sm font-bold rounded">
-                {totalItems || ''}
+                {totalItems}
               </div>
             </div>
           </div>
@@ -255,11 +255,12 @@ export default function App() {
             </div>
           </div>
 
+          {/* 💡「お茶席券」の高さを h-8 に変更し、集計ボタンの高さとガチッと揃えました */}
           <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => handleAddTicket('お茶席券(冷)', 500)} disabled={isLoading} className="bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#8DB7C7] border border-gray-400 shadow py-1.5 text-[10px] font-bold text-gray-700 rounded">
+            <button onClick={() => handleAddTicket('お茶席券(冷)', 500)} disabled={isLoading} className="h-8 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#8DB7C7] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
               お茶席券(冷)
             </button>
-            <button onClick={() => handleAddTicket('お茶席券(温)', 500)} disabled={isLoading} className="bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#D2938E] border border-gray-400 shadow py-1.5 text-[10px] font-bold text-gray-700 rounded">
+            <button onClick={() => handleAddTicket('お茶席券(温)', 500)} disabled={isLoading} className="h-8 bg-gradient-to-b from-gray-100 to-[#E2E4E7] border-t-2 border-t-[#D2938E] border border-gray-400 shadow text-[10px] font-bold text-gray-700 rounded flex items-center justify-center">
               お茶席券(温)
             </button>
           </div>
